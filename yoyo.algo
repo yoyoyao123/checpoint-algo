@@ -1,0 +1,95 @@
+ALGORITHM permutation circulaire
+VAR
+
+    x,y,z,n: INTEGER;
+
+BEGIN
+
+    x:=3;
+    y:=4;
+    z:=6;
+
+    Write ("x:y");
+    Write ("y:x");
+    Write ("z:z");
+    n:=x;
+    x:=y;
+    y:=z;
+    z:=n
+    Write ("x:x");
+    Write ("y:y");
+    Write ("z:z");
+
+END
+
+
+ALGORITHM 
+VAR
+
+    nbr-km , nbr-j :INTEGER;
+    coût-jr :INTEGER;
+    coût-km : INTEGER;
+    CONST 
+    r1:0.7, r2:0.4, r3:0.2, p_d:100, ins:0.3, TVA:0.18
+
+BEGIN
+
+    Read(nbr-km)
+    Read(nbr-jr)
+
+    IF (nbr-km<=100) THEN
+        coût-km:(r1*nbr-km + nbr-jr*ins)
+        coût-km:(0.18*coût-km) + coût-km
+    END_IF
+
+    IF (nbr-km>100 and nbr-km<=1000) THEN
+        coût-km = [(r1*100) + (r2*nbr-km - 100)]
+        coût-km := (coût-km + nbr-jr*ins)
+        coût-km := (0.18*coût-km) + coût-km
+    END_IF
+
+    IF (nbr-km>1000) THEN
+        coût-km = (r1*100) + (r2*900) + (r3*nbr-km - 1000)
+        coût-km = (coût-km + (ins*nbr-jr))
+        coût-km = coût-km + (coût-km*0.18)
+    END_IF
+
+    coût-jr:=(nbr-jr*p_d + nbr-jr*ins)
+    coût-jr:=(coût-jr*0.18) + coût-jr
+
+    IF (coût-km < coût-jr) THEN
+        Write (coût-km)
+    ELSE
+        Write (coût-jr)
+    END_IF
+
+
+
+
+ALGORITHM
+
+VAR
+
+    nbr-mot: INTEGER;
+    nbr-caract: INTEGER;
+    nbr-voyelle: INTEGER;
+    phr: STRING
+
+BEGIN
+
+    Read(phr)
+    FOR i FROM 0 TO len(phr) DO
+        IF (phr[i]<>'.') THEN
+            IF (phr[i]=='') THEN
+                nbr-mot++
+            END_IF
+        END_IF
+
+        IF (phr[i]="a" || phr[i]="e" || phr[i]="i" || phr[i]= "o" || phr[i]= "u" || phr[i]= "y") THEN
+            nbr-voyelle++
+        END_IF
+
+        phr[i]=len(phr)
+    END_FOR
+
+END
